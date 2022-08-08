@@ -39,20 +39,31 @@ public class GameManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
             pauseMenu.Toggle();
 
-        // if(Input.GetKeyDown(KeyCode.L))
-        // {
-        //     Time.timeScale = 5f;
-        // }
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            EndGame();
+            return;
+        }
+        
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+            WinLevel();
+        }
 
-        // if(Input.GetKeyDown(KeyCode.Semicolon))
-        // {
-        //     Time.timeScale = 2f;
-        // }
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            Time.timeScale = 5f;
+        }
 
-        // if(Input.GetKeyDown(KeyCode.Quote))
-        // {
-        //     Time.timeScale = 1f;
-        // }
+        if(Input.GetKeyDown(KeyCode.Semicolon))
+        {
+            Time.timeScale = 2f;
+        }
+
+        if(Input.GetKeyDown(KeyCode.Quote))
+        {
+            Time.timeScale = 1f;
+        }
     }
 
     void EndGame()

@@ -12,7 +12,6 @@ public class MainMenu : MonoBehaviour
     {
         sceneFader.FadeTo(SceneFader.levelSelectSceneName);
     }
-
     public void Quit()
     {
         Application.Quit();

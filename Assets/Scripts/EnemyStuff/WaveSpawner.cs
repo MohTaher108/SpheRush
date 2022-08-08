@@ -56,8 +56,6 @@ public class WaveSpawner : MonoBehaviour
 
     IEnumerator SpawnWave()
     {
-        PlayerStats.Rounds++;
-
         currentWave = waves[waveIndex];
         EnemiesAlive = currentWave.count;
         for (int i = 0; i < currentWave.count; i++)
@@ -81,6 +79,7 @@ public class WaveSpawner : MonoBehaviour
 
         if(EnemiesAlive <= 0)
         {
+            PlayerStats.Rounds++;
             PlayerStats.Money += currentWave.moneyGained;
         }
     }

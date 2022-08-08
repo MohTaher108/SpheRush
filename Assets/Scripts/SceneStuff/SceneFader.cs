@@ -5,7 +5,6 @@ using System.Collections;
 
 public class SceneFader : MonoBehaviour
 {
-
     // Reference to the main menu scene name for loading it
     public const string menuSceneName = "MainMenu";
     // Reference to the level select scene name for loading it
