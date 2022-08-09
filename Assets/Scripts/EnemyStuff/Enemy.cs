@@ -17,6 +17,9 @@ public class Enemy : MonoBehaviour
     public int worth = 50;
     public int LivesCount = 1;
 
+    // Check to see if it's a fake enemy, which doesn't count as a life
+    public bool isFake = false;
+
     [Header("Slow stuff")]
     // Slow lingering effect
     public float slowTimerStart = 3f;

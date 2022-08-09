@@ -5,6 +5,7 @@ public class CompleteLevel : MonoBehaviour
 {
     public SceneFader sceneFader;
 
+    [HideInInspector]
     public int levelNumber;
 
     // If the level hasn't been completed before, then increment StarsCount

@@ -46,8 +46,11 @@ public class EnemyMovement : MonoBehaviour
     // Destroy the enemy when they reach the end
     void EndPath()
     {
-        PlayerStats.Lives -= enemy.LivesCount;
-        WaveSpawner.enemyDied();
+        if(!enemy.isFake)
+        {
+            PlayerStats.Lives -= enemy.LivesCount;
+            WaveSpawner.enemyDied();
+        }
         Destroy(gameObject);
     }
     

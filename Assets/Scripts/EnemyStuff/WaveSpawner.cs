@@ -17,7 +17,7 @@ public class WaveSpawner : MonoBehaviour
     public TextMeshProUGUI waveCountdownText;
 
     public GameManager gameManager;
-
+    public GameObject fakeEnemy;
 
     void Start()
     {
@@ -70,6 +70,11 @@ public class WaveSpawner : MonoBehaviour
     void SpawnEnemy(GameObject enemy)
     {
         Instantiate(enemy, enemySpawnPoint.position, enemySpawnPoint.rotation);
+    }
+
+    public void PathCheck()
+    {
+        Instantiate(fakeEnemy, enemySpawnPoint.position, enemySpawnPoint.rotation);
     }
 
     // Report that an enemy died and give the player money if they finished the wave

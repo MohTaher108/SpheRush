@@ -8,21 +8,22 @@ public class RightSideBar : MonoBehaviour
     public Sprite pauseButtonSprite;
     private bool isPaused;
 
+    // Check if game was ever played, to disable the pathCheckObject
+    private bool gameStart;
+
     public Image image;
 
     public WaveSpawner waveSpawner;
 
     public GameObject HowToPlayUI;
 
-    private Button pauseButton;
+    public GameObject pathCheckObject;
 
     void Start()
     {
         isPaused = true;
         waveSpawner.enabled = false;
         image.sprite = playButtonSprite;
-        // Get the pause button from the Buttons gameObject
-        pauseButton = this.transform.Find("Buttons").Find("Play/Pause").gameObject.GetComponent<Button>();
     }
 
     void Update()
@@ -34,6 +35,12 @@ public class RightSideBar : MonoBehaviour
     // Toggles the pause/play
     public void Toggle()
     {
+        // Disable path check if game starts
+        if(!gameStart)
+        {
+            pathCheckObject.SetActive(false);
+        }
+
         isPaused = !isPaused;
 
         if(isPaused)
@@ -51,5 +58,11 @@ public class RightSideBar : MonoBehaviour
     {
         HowToPlayUI.SetActive(true);
         Time.timeScale = 0f;
+    }
+
+    public void PathCheck()
+    {
+        waveSpawner.PathCheck();
+        pathCheckObject.SetActive(false);
     }
 }
