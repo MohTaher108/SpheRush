@@ -1,29 +1,37 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
+using System.IO;
 using TMPro;
 
 public class WaveSpawner : MonoBehaviour
 {
-    public Wave[] waves;
-    private int waveIndex;
-
-    private static int EnemiesAlive;
-    public Transform enemySpawnPoint;
-
-    public float timeBetweenWaves = 2f;
-    private float countdown;
+    // Reader for our wave data .txt file
+    StreamReader sr;
     private static Wave currentWave;
 
-    public TextMeshProUGUI waveCountdownText;
+    private static int EnemiesAlive;
 
+    [Header("Waves timer")]
+    public float timeBetweenWaves = 2f;
+    private float countdown;
+
+    [Header("Unity Stuff")]
+    public Transform enemySpawnPoint;
+    public TextMeshProUGUI waveCountdownText;
     public GameManager gameManager;
-    public GameObject fakeEnemy;
+
+    public GameObject Enemy_Fast;
+    public GameObject Enemy_Simple;
+    public GameObject Enemy_Tough;
+    public GameObject Enemy_Fake;
 
     void Start()
     {
         countdown = 0;
         EnemiesAlive = 0;
-        waveIndex = 0;
+        // Open wave data .txt file
+        sr = new StreamReader("Assets/Prefabs/WavePresets/" + SceneManager.GetActiveScene().name + ".txt");
     }
 
     void Update()
@@ -35,7 +43,7 @@ public class WaveSpawner : MonoBehaviour
         }
 
         // Has the player finished all levels? (include lives check, because player wins otherwise when level ends as last enemy reaches the end)
-        if(waveIndex == waves.Length && PlayerStats.Lives > 0)
+        if(sr.EndOfStream && PlayerStats.Lives > 0)
         {
             gameManager.WinLevel();
             this.enabled = false;
@@ -56,15 +64,14 @@ public class WaveSpawner : MonoBehaviour
 
     IEnumerator SpawnWave()
     {
-        currentWave = waves[waveIndex];
-        EnemiesAlive = currentWave.count;
+        currentWave = new Wave(sr, Enemy_Simple, Enemy_Fast, Enemy_Tough);
+        
         for (int i = 0; i < currentWave.count; i++)
         {
-            SpawnEnemy(currentWave.enemy);
+            SpawnEnemy(currentWave.enemyPrefab);
+            EnemiesAlive++;
             yield return new WaitForSeconds(1f / currentWave.rate); // Wait 1/rate time between spawning each enemy
         }
-
-        waveIndex++;
     }
 
     void SpawnEnemy(GameObject enemy)
@@ -74,7 +81,7 @@ public class WaveSpawner : MonoBehaviour
 
     public void PathCheck()
     {
-        Instantiate(fakeEnemy, enemySpawnPoint.position, enemySpawnPoint.rotation);
+        Instantiate(Enemy_Fake, enemySpawnPoint.position, enemySpawnPoint.rotation);
     }
 
     // Report that an enemy died and give the player money if they finished the wave

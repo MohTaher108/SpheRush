@@ -5,6 +5,8 @@ public class CompleteLevel : MonoBehaviour
 {
     public SceneFader sceneFader;
 
+    public bool isSecretLevel = false;
+
     [HideInInspector]
     public int levelNumber;
 
@@ -20,17 +22,18 @@ public class CompleteLevel : MonoBehaviour
 
     public void Continue()
     {
+        if(isSecretLevel)
+        {
+            sceneFader.FadeTo(SceneFader.levelSelectSceneName);
+            return;
+        }
+
         sceneFader.FadeTo(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void Menu()
     {
         sceneFader.FadeTo(SceneFader.menuSceneName);
-    }
-
-    public void levelSelect()
-    {
-        sceneFader.FadeTo(SceneFader.levelSelectSceneName);
     }
     
 }

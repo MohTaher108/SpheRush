@@ -3421,31 +3421,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba7aa750a251ef4cb280d78dbc7ba99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waves:
-  - enemy: {fileID: 4280253242193954910, guid: 3abedd4ffa459d74aa1db52c4780506c, type: 3}
-    count: 2
-    rate: 2
-    moneyGained: 30
-  - enemy: {fileID: 4280253242193954910, guid: 3abedd4ffa459d74aa1db52c4780506c, type: 3}
-    count: 3
-    rate: 2
-    moneyGained: 40
-  - enemy: {fileID: 4280253242193954910, guid: 61e804841ff4fa44cb3252b65f0c497a, type: 3}
-    count: 5
-    rate: 3
-    moneyGained: 55
-  - enemy: {fileID: 4280253242193954910, guid: 3abedd4ffa459d74aa1db52c4780506c, type: 3}
-    count: 8
-    rate: 3
-    moneyGained: 100
-  - enemy: {fileID: 4280253242193954910, guid: 621afd9ac672e224fa06e0c70fad1f4d, type: 3}
-    count: 2
-    rate: 1
-    moneyGained: 0
-  enemySpawnPoint: {fileID: 1945725308}
   timeBetweenWaves: 2
+  enemySpawnPoint: {fileID: 1945725308}
   waveCountdownText: {fileID: 613482685}
   gameManager: {fileID: 371525986}
+  Enemy_Fast: {fileID: 4280253242193954910, guid: 61e804841ff4fa44cb3252b65f0c497a, type: 3}
+  Enemy_Simple: {fileID: 4280253242193954910, guid: 3abedd4ffa459d74aa1db52c4780506c, type: 3}
+  Enemy_Tough: {fileID: 4280253242193954910, guid: 621afd9ac672e224fa06e0c70fad1f4d, type: 3}
+  Enemy_Fake: {fileID: 4280253242193954910, guid: d606283eabcfa324b8f8f87811cbb6fe, type: 3}
 --- !u!4 &371525983
 Transform:
   m_ObjectHideFlags: 0
@@ -4788,6 +4771,30 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4374451035040752487, guid: 6da338b44e223e34d8603634b8644558, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539176982259157272, guid: 6da338b44e223e34d8603634b8644558, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539176982259157272, guid: 6da338b44e223e34d8603634b8644558, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539176982259157272, guid: 6da338b44e223e34d8603634b8644558, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539176982259157272, guid: 6da338b44e223e34d8603634b8644558, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539176982259157272, guid: 6da338b44e223e34d8603634b8644558, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539176982259157272, guid: 6da338b44e223e34d8603634b8644558, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}

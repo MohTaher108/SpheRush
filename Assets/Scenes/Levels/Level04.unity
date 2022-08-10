@@ -3071,32 +3071,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba7aa750a251ef4cb280d78dbc7ba99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waves:
-  - enemy: {fileID: 4280253242193954910, guid: 3abedd4ffa459d74aa1db52c4780506c, type: 3}
-    count: 1
-    rate: 1
-    moneyGained: 0
-  - enemy: {fileID: 4280253242193954910, guid: 3abedd4ffa459d74aa1db52c4780506c, type: 3}
-    count: 1
-    rate: 4
-    moneyGained: 0
-  - enemy: {fileID: 4280253242193954910, guid: 3abedd4ffa459d74aa1db52c4780506c, type: 3}
-    count: 1
-    rate: 4
-    moneyGained: 0
-  - enemy: {fileID: 4280253242193954910, guid: 3abedd4ffa459d74aa1db52c4780506c, type: 3}
-    count: 1
-    rate: 4
-    moneyGained: 0
-  - enemy: {fileID: 4280253242193954910, guid: 3abedd4ffa459d74aa1db52c4780506c, type: 3}
-    count: 1
-    rate: 4
-    moneyGained: 0
-  enemySpawnPoint: {fileID: 1945725308}
   timeBetweenWaves: 2
+  enemySpawnPoint: {fileID: 1945725308}
   waveCountdownText: {fileID: 613482685}
   gameManager: {fileID: 371525986}
-  fakeEnemy: {fileID: 4280253242193954910, guid: d606283eabcfa324b8f8f87811cbb6fe, type: 3}
+  Enemy_Fast: {fileID: 4280253242193954910, guid: 61e804841ff4fa44cb3252b65f0c497a, type: 3}
+  Enemy_Simple: {fileID: 4280253242193954910, guid: 3abedd4ffa459d74aa1db52c4780506c, type: 3}
+  Enemy_Tough: {fileID: 4280253242193954910, guid: 621afd9ac672e224fa06e0c70fad1f4d, type: 3}
+  Enemy_Fake: {fileID: 4280253242193954910, guid: d606283eabcfa324b8f8f87811cbb6fe, type: 3}
 --- !u!4 &371525983
 Transform:
   m_ObjectHideFlags: 0
@@ -3139,7 +3121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e115fba56f02f14caab206bb94174a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startMoney: 150
+  startMoney: 1000
   startLives: 5
 --- !u!114 &371525986
 MonoBehaviour:
