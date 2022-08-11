@@ -1,4 +1,5 @@
 using UnityEngine;
+using Unity.RemoteConfig;
 using System.Collections;
 
 public class Turret : MonoBehaviour
@@ -10,6 +11,8 @@ public class Turret : MonoBehaviour
 
     [Header("General")]
     public float turretRange = 15f;
+    [HideInInspector] // Is the turret upgraded already?
+    public bool isUpgraded = false;
 
     [Header("Use Bullets/Missiles (default)")]
     public GameObject bulletPrefab;
@@ -41,6 +44,29 @@ public class Turret : MonoBehaviour
     public string enemyTag = "Enemy";
     // Projectiles' spawn location
     public Transform firePoint;
+
+    // Remote Config stuff
+    public struct userAttributes { }
+    public struct appAttributes { }
+
+    // Fetch remote configs
+    void Awake()
+    {
+        if(useLaser)
+        {
+            ConfigManager.FetchCompleted += SetTurretMaxDPS;
+            ConfigManager.FetchConfigs<userAttributes, appAttributes>(new userAttributes(), new appAttributes());
+        }
+    }
+
+    // Change the MaxDPS of our turret
+    void SetTurretMaxDPS(ConfigResponse response)
+    {
+        if(isUpgraded)
+            maxDPS = ConfigManager.appConfig.GetFloat("LaserTurretUpgradedMaxDPS");
+        else
+            maxDPS = ConfigManager.appConfig.GetFloat("LaserTurretMaxDPS");
+    }
 
     void Start()
     {
@@ -195,5 +221,11 @@ public class Turret : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, turretRange);
+    }
+
+    // Remove the updating of the turret DPS when it's destroyed, so the ConfigManager doesn't call a function on an inexistant object
+    void OnDestroy()
+    {
+        ConfigManager.FetchCompleted -= SetTurretMaxDPS;
     }
 }

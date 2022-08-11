@@ -11,12 +11,13 @@ public class Node : MonoBehaviour
     // Offset of spawnpoint of turret so it doesn't spawn inside the node
     public Vector3 positionOffset;
 
-    [HideInInspector] // The turret instance currently on this node (if there isn't a turret then turret = null)
+    // The turret instance currently on this node (if there isn't a turret then turret == null)
+    [HideInInspector]
     public GameObject turret;
+    [HideInInspector]
+    public Turret turretScript;
     [HideInInspector] // The blueprint we want to use to build/upgrade on this node
     public TurretBlueprint turretBlueprint;
-    [HideInInspector] // Is the turret upgraded already?
-    public bool isUpgraded = false;
 
     // Keep track of the renderer so we don't need to refind it
     private Renderer rend;
@@ -70,6 +71,7 @@ public class Node : MonoBehaviour
         // Instantiate turret
         GameObject _turret = (GameObject) Instantiate(blueprint.prefab, GetBuildPosition(), Quaternion.identity);
         turret = _turret;
+        turretScript = _turret.GetComponent<Turret>();
         turretBlueprint = blueprint;
 
         // Instantiate particle effects for building a turret then delete them after 5 seconds
@@ -87,7 +89,8 @@ public class Node : MonoBehaviour
         // Instantiate upgraded turret
         GameObject _turret = (GameObject) Instantiate(turretBlueprint.upgradedPrefab, GetBuildPosition(), Quaternion.identity);
         turret = _turret;
-        isUpgraded = true;
+        turretScript = _turret.GetComponent<Turret>();
+        turretScript.isUpgraded = true;
 
         // Instantiate particle effects for upgrading a turret then delete them after 5 seconds
         GameObject effect = Instantiate(buildManager.buildEffect, GetBuildPosition(), Quaternion.identity);
@@ -96,7 +99,7 @@ public class Node : MonoBehaviour
 
     public void SellTurret()
     {
-        PlayerStats.Money += turretBlueprint.GetSellAmount(isUpgraded);
+        PlayerStats.Money += turretBlueprint.GetSellAmount(turretScript.isUpgraded);
 
         // Instantiate particle effects for selling a turret then delete them after 5 seconds
         GameObject effect = Instantiate(buildManager.sellEffect, GetBuildPosition(), Quaternion.identity);
@@ -105,7 +108,7 @@ public class Node : MonoBehaviour
         // Get rid of turret
         Destroy(turret);
         turretBlueprint = null;
-        isUpgraded = false;
+        turretScript.isUpgraded = false;
     }
 
     // Change the node's color when it's hovered over

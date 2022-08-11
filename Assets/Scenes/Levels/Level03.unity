@@ -2899,6 +2899,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba7aa750a251ef4cb280d78dbc7ba99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waveDataFile: {fileID: 4900000, guid: be58c566b70341c4282754bec2477cfb, type: 3}
   timeBetweenWaves: 2
   enemySpawnPoint: {fileID: 1945725308}
   waveCountdownText: {fileID: 613482685}
@@ -12028,6 +12029,30 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4374451035040752487, guid: 6da338b44e223e34d8603634b8644558, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539176982259157272, guid: 6da338b44e223e34d8603634b8644558, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539176982259157272, guid: 6da338b44e223e34d8603634b8644558, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539176982259157272, guid: 6da338b44e223e34d8603634b8644558, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539176982259157272, guid: 6da338b44e223e34d8603634b8644558, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539176982259157272, guid: 6da338b44e223e34d8603634b8644558, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539176982259157272, guid: 6da338b44e223e34d8603634b8644558, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}

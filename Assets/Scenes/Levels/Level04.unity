@@ -3071,6 +3071,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba7aa750a251ef4cb280d78dbc7ba99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waveDataFile: {fileID: 4900000, guid: f0961df2d7f91dc448e9223eff5a2d33, type: 3}
   timeBetweenWaves: 2
   enemySpawnPoint: {fileID: 1945725308}
   waveCountdownText: {fileID: 613482685}

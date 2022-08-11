@@ -39,7 +39,7 @@ public class NodeUI : MonoBehaviour
         transform.position = target.GetBuildPosition();
 
         // If target isn't upgraded, display cost and UI
-        if(!target.isUpgraded) 
+        if(!target.turretScript.isUpgraded) 
         {
             upgradeCost.text = "$" + target.turretBlueprint.upgradeCost;
             // Check if the user has enough money to upgrade the turret
@@ -51,7 +51,7 @@ public class NodeUI : MonoBehaviour
         }
 
         // Display sell amount
-        sellAmount.text = "$" + target.turretBlueprint.GetSellAmount(target.isUpgraded);
+        sellAmount.text = "$" + target.turretBlueprint.GetSellAmount(target.turretScript.isUpgraded);
 
         ui.SetActive(true);
     }

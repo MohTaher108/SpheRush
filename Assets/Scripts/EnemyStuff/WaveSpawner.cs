@@ -1,13 +1,14 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 using System.Collections;
 using System.IO;
 using TMPro;
 
 public class WaveSpawner : MonoBehaviour
 {
-    // Reader for our wave data .txt file
-    StreamReader sr;
+    public TextAsset waveDataFile;
+    private string[] waveData;
     private static Wave currentWave;
 
     private static int EnemiesAlive;
@@ -31,7 +32,7 @@ public class WaveSpawner : MonoBehaviour
         countdown = 0;
         EnemiesAlive = 0;
         // Open wave data .txt file
-        sr = new StreamReader("Assets/Prefabs/WavePresets/" + SceneManager.GetActiveScene().name + ".txt");
+        waveData = waveDataFile.text.Split(new string[] { "\n" }, StringSplitOptions.None);
     }
 
     void Update()
@@ -43,7 +44,7 @@ public class WaveSpawner : MonoBehaviour
         }
 
         // Has the player finished all levels? (include lives check, because player wins otherwise when level ends as last enemy reaches the end)
-        if(sr.EndOfStream && PlayerStats.Lives > 0)
+        if(PlayerStats.Rounds == waveData.Length && PlayerStats.Lives > 0)
         {
             gameManager.WinLevel();
             this.enabled = false;
@@ -64,7 +65,7 @@ public class WaveSpawner : MonoBehaviour
 
     IEnumerator SpawnWave()
     {
-        currentWave = new Wave(sr, Enemy_Simple, Enemy_Fast, Enemy_Tough);
+        currentWave = new Wave(waveData, Enemy_Simple, Enemy_Fast, Enemy_Tough);
         
         for (int i = 0; i < currentWave.count; i++)
         {

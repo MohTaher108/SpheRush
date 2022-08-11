@@ -3421,6 +3421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba7aa750a251ef4cb280d78dbc7ba99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waveDataFile: {fileID: 4900000, guid: 50f8638fe0cc0ab4b8b448cef16a8ec6, type: 3}
   timeBetweenWaves: 2
   enemySpawnPoint: {fileID: 1945725308}
   waveCountdownText: {fileID: 613482685}
@@ -4722,6 +4723,10 @@ PrefabInstance:
       propertyPath: sceneFader
       value: 
       objectReference: {fileID: 1409839861}
+    - target: {fileID: 3504499279907988738, guid: 6da338b44e223e34d8603634b8644558, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -27.500732
+      objectReference: {fileID: 0}
     - target: {fileID: 3504499281053638864, guid: 6da338b44e223e34d8603634b8644558, type: 3}
       propertyPath: m_Sprite
       value: 

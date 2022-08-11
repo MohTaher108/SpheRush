@@ -10,6 +10,9 @@ scopes = {
 	"last_search.DE949528" = "playerprefs"
 	"OpenInspectorPreview.DE949528" = "0"
 	"currentGroup.DE949528" = "menu"
+	"last_search.DA949528" = "unity service"
+	"OpenInspectorPreview.DA949528" = "0"
+	"currentGroup.DA949528" = "all"
 }
 providers = {
 	adb = {
