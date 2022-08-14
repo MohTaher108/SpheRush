@@ -49,7 +49,7 @@ public class EnemyMovement : MonoBehaviour
         if(!enemy.isFake)
         {
             PlayerStats.Lives -= enemy.LivesCount;
-            WaveSpawner.enemyDied();
+            GameStats.EnemiesAlive--;
         }
         Destroy(gameObject);
     }

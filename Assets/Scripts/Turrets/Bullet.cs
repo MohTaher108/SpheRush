@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -9,9 +10,9 @@ public class Bullet : MonoBehaviour
     public float projectileSpeed = 70f;
     public int projectileDamage = 50;
 
-    // Missile explosion radius and percentage of damage
-    public float ExplosionRadius = 0f;
-    public float ExplosionDamagePercent = 0.7f;
+    public float MissileExplosionRadius = 0f;
+    public int missileNumEnemiesHit = 0;
+    public float ExplosionDamagePercent = 0f;
     // Particle effects for the projectile's impact
     public GameObject impactEffect;
 
@@ -56,7 +57,7 @@ public class Bullet : MonoBehaviour
         Destroy(effectIns, 5f);
 
         // If we're using missiles, then damage all nearby enemies
-        if(ExplosionRadius > 0f) 
+        if(MissileExplosionRadius > 0f) 
             Explode();
         else // Otherwise damage target
             Damage(target, projectileDamage);
@@ -71,13 +72,24 @@ public class Bullet : MonoBehaviour
         Damage(target, projectileDamage);
 
         // Detect all objects nearby
-        Collider[] colliders = Physics.OverlapSphere(transform.position, ExplosionRadius);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, MissileExplosionRadius);
 
         // Find all nearby enemies and deal a percentage of damage to them
-        Collider targetCollider = target.GetComponent<Collider>();
+        var enemyList = new List<(float, Collider)>(); // Keep track of every enemy and their distance away from the missile epicenter
+        Collider primaryCollider = target.GetComponent<Collider>(); // Don't target the enemy that the missile hit
         foreach(Collider collider in colliders)
-            if(collider.tag == "Enemy" && collider != targetCollider)
-                Damage(collider.transform, ExplosionDamagePercent * projectileDamage);
+        {
+            if(collider.tag == "Enemy" && collider != primaryCollider)
+            {
+                float distance = Vector3.Distance(target.position, collider.transform.position);
+                enemyList.Add((distance, collider));
+            }
+        }
+
+        // Sort the array and damage the nearest 'missileNumEnemiesHit' enemies
+        enemyList.Sort();
+        for(int i = 0; i < missileNumEnemiesHit && i < enemyList.Count; i++)
+            Damage(enemyList[i].Item2.transform, ExplosionDamagePercent * projectileDamage);
     }
 
     // Damage an enemy when bullet hits it

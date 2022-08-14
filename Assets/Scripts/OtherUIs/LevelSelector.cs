@@ -5,9 +5,7 @@ using TMPro;
 
 public class LevelSelector : MonoBehaviour
 {
-
-    public SceneFader sceneFader;
-
+    
     public Button[] levelButtons;
 
     public TextMeshProUGUI StarsCount;
@@ -47,7 +45,7 @@ public class LevelSelector : MonoBehaviour
             secretLevelKey++;
         } else if((Input.GetKeyDown(KeyCode.T) && secretLevelKey == 5)) // If the user finished the word, load the secret level
         {
-            sceneFader.FadeTo("SecretLevel");
+            SceneFader.instance.FadeTo(SceneFader.secretLevelSceneName);
         } else if(Input.anyKeyDown) // If the user hits the wrong button, reset their progress
         {
             secretLevelKey = 0;
@@ -56,12 +54,12 @@ public class LevelSelector : MonoBehaviour
 
     public void SelectLevel(string levelName)
     {
-        sceneFader.FadeTo(levelName);
+        SceneFader.instance.FadeTo(levelName);
     }
 
     public void Menu()
     {
-        sceneFader.FadeTo(SceneFader.menuSceneName);
+        SceneFader.instance.FadeTo(SceneFader.menuSceneName);
     }
 
 }

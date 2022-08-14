@@ -211,6 +211,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5397170359104415314}
   - component: {fileID: 7930645597299456750}
+  - component: {fileID: -7387406989131023916}
   m_Layer: 0
   m_Name: MissileLauncher
   m_TagString: Untagged
@@ -261,6 +262,22 @@ MonoBehaviour:
   turnSpeed: 10
   enemyTag: Enemy
   firePoint: {fileID: 1977947762952993704}
+--- !u!114 &-7387406989131023916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4732519546070498536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ba947cc5056d7746a2f09d10e07043d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 4732519546070498536}
+  cost: 250
+  value: 250
+  upgradedTurretBlueprint: {fileID: -5992668536505836181, guid: db5df5ab7d73b9746ab608bf65ad22cc, type: 3}
 --- !u!1 &6390692573372843926
 GameObject:
   m_ObjectHideFlags: 0

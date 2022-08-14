@@ -47,7 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileSpeed: 70
   projectileDamage: 40
-  ExplosionRadius: 10
+  MissileExplosionRadius: 10
+  missileNumEnemiesHit: 5
   ExplosionDamagePercent: 0.6
   impactEffect: {fileID: 6476531636072171670, guid: 9dfc199c96d282141a562ab4b62239e2, type: 3}
 --- !u!1 &8661829294642608936

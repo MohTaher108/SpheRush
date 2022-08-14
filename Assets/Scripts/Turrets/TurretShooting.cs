@@ -2,33 +2,28 @@ using UnityEngine;
 using Unity.RemoteConfig;
 using System.Collections;
 
-public class Turret : MonoBehaviour
+public class TurretShooting : MonoBehaviour
 {
 
-    // Target we're aiming at, and a reference to the enemy object
-    private Transform targetEnemyTransform;
-    private Enemy targetEnemyScript;
-
     [Header("General")]
-    public float turretRange = 15f;
-    [HideInInspector] // Is the turret upgraded already?
-    public bool isUpgraded = false;
+    public float turretRange;
 
     [Header("Use Bullets/Missiles (default)")]
     public GameObject bulletPrefab;
-    public float fireRate = 1f;
+    public float fireRate;
     private float fireCountdown = 0f;
 
     [Header("Use Laser")]
     public bool useLaser = false;
     // Create a linear ramping effect for the laser turret's laser's damage and width
-    public float maxDPS = 30f;
+    public float PercentDamage;
+    public float maxDPS;
     private float currentDPS;
-    public float maxTime = 2f;
+    public float maxTime;
     private float currentLaserTime;
     private float lineWidth; // Keep track of the lineRenderer's starting width to create a beam that gets bigger as DPS increases
     // Slow enemy to (1 - slowAmount)
-    public float slowAmount = .5f;
+    public float slowAmount;
 
     // Laser effects
     public ParticleSystem impactEffect;
@@ -38,35 +33,39 @@ public class Turret : MonoBehaviour
     [Header("Unity Setup Fields")]
     // Turrets rotating body
     public Transform partToRotate;
-    // Turn speed when tracking enemy (smaller = smoother)
-    public float turnSpeed = 10f;
-    // Tag for enemies so the turret can reference all enemies
-    public string enemyTag = "Enemy";
     // Projectiles' spawn location
     public Transform firePoint;
 
-    // Remote Config stuff
-    public struct userAttributes { }
-    public struct appAttributes { }
+    // Target we're aiming at, and a reference to the enemy object
+    private Transform enemyTargetTransform;
+    private Enemy enemyTargetScript;
+    // Tag for enemies so the turret can reference all enemies
+    private string enemyTag = "Enemy";
+    // Turn speed when tracking enemy (smaller = smoother)
+    private float turnSpeed = 10f;
 
-    // Fetch remote configs
-    void Awake()
-    {
-        if(useLaser)
-        {
-            ConfigManager.FetchCompleted += SetTurretMaxDPS;
-            ConfigManager.FetchConfigs<userAttributes, appAttributes>(new userAttributes(), new appAttributes());
-        }
-    }
+    // // Remote Config stuff
+    // public struct userAttributes { }
+    // public struct appAttributes { }
 
-    // Change the MaxDPS of our turret
-    void SetTurretMaxDPS(ConfigResponse response)
-    {
-        if(isUpgraded)
-            maxDPS = ConfigManager.appConfig.GetFloat("LaserTurretUpgradedMaxDPS");
-        else
-            maxDPS = ConfigManager.appConfig.GetFloat("LaserTurretMaxDPS");
-    }
+    // // Fetch remote configs
+    // void Awake()
+    // {
+    //     if(useLaser)
+    //     {
+    //         ConfigManager.FetchCompleted += SetTurretMaxDPS;
+    //         ConfigManager.FetchConfigs<userAttributes, appAttributes>(new userAttributes(), new appAttributes());
+    //     }
+    // }
+
+    // // Change the MaxDPS of our turret
+    // void SetTurretMaxDPS(ConfigResponse response)
+    // {
+    //     if(isUpgraded)
+    //         maxDPS = ConfigManager.appConfig.GetFloat("LaserTurretUpgradedMaxDPS");
+    //     else
+    //         maxDPS = ConfigManager.appConfig.GetFloat("LaserTurretMaxDPS");
+    // }
 
     void Start()
     {
@@ -100,11 +99,11 @@ public class Turret : MonoBehaviour
         // If enemies nearby, target closest enemy
         if(nearestEnemy != null && shortestDistance <= turretRange) 
         {
-            targetEnemyTransform = nearestEnemy.transform;
-            Enemy previousEnemyScript = targetEnemyScript;
-            targetEnemyScript = nearestEnemy.GetComponent<Enemy>();
+            enemyTargetTransform = nearestEnemy.transform;
+            Enemy previousEnemyScript = enemyTargetScript;
+            enemyTargetScript = nearestEnemy.GetComponent<Enemy>();
             // Reset laser
-            if(useLaser && previousEnemyScript != targetEnemyScript)
+            if(useLaser && previousEnemyScript != enemyTargetScript)
             {
                 currentDPS = 0;
                 currentLaserTime = 0;
@@ -112,7 +111,7 @@ public class Turret : MonoBehaviour
             }
         } else // Otherwise set target to null so Update() can stop any active lasers
         {
-            targetEnemyTransform = null;
+            enemyTargetTransform = null;
         }
 
     }
@@ -124,7 +123,7 @@ public class Turret : MonoBehaviour
             fireCountdown -= Time.deltaTime;
 
         // If UpdateTarget() didn't find an enemy, stop any lasers and give up
-        if(targetEnemyTransform == null) 
+        if(enemyTargetTransform == null) 
         {
             // If the turret has an active laser beamer, then disable the laser effects
             if(useLaser && lineRenderer.enabled) 
@@ -150,7 +149,7 @@ public class Turret : MonoBehaviour
     void LockOnTarget()
     {
         // Compute the distance and rotation of the enemy target
-        Vector3 dir = targetEnemyTransform.position - transform.position;
+        Vector3 dir = enemyTargetTransform.position - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
 
         // Use Lerp() to make the turret rotate smoothly instead of snapping, and turn the Quaternion into euler angles since it's easier to manage
@@ -169,12 +168,13 @@ public class Turret : MonoBehaviour
             currentLaserTime = Mathf.Clamp(currentLaserTime, 0f, maxTime);
 
             // Update the DPS and lineRenderer's width (the lineRenderer's width goes between 0.15f and 0.3f)
-            currentDPS = (currentLaserTime / maxTime) * maxDPS;
+            currentDPS = (currentLaserTime / maxTime) * (PercentDamage * enemyTargetScript.startHealth);
+            currentDPS = Mathf.Clamp(currentDPS, 0f, maxDPS);
             lineRenderer.startWidth = (currentLaserTime / maxTime) * lineWidth;
         }
 
-        targetEnemyScript.TakeDamage(currentDPS * Time.deltaTime);
-        targetEnemyScript.Slow(slowAmount);
+        enemyTargetScript.TakeDamage(currentDPS * Time.deltaTime);
+        enemyTargetScript.Slow(slowAmount);
 
         // Enable laser effects, if needed
         if(!lineRenderer.enabled)
@@ -186,17 +186,17 @@ public class Turret : MonoBehaviour
 
         // Set the lineRenderer to start at the laser beamer's firepoint and end at the enemy
         lineRenderer.SetPosition(0, firePoint.position);
-        lineRenderer.SetPosition(1, targetEnemyTransform.position);
+        lineRenderer.SetPosition(1, enemyTargetTransform.position);
 
         // Set the laser's effect's rotation to face the turret
-        Vector3 dir = firePoint.position - targetEnemyTransform.position;
+        Vector3 dir = firePoint.position - enemyTargetTransform.position;
         impactEffect.transform.rotation = Quaternion.LookRotation(dir);
         // Set the laser's effect's position to be at the edge of the enemy
-        impactEffect.transform.position = targetEnemyTransform.position + dir.normalized;
+        impactEffect.transform.position = enemyTargetTransform.position + dir.normalized;
 
         // Also, fix the enemy's lingering slow effect's transform's rotation and position
-        targetEnemyScript.slowEffect.transform.rotation = Quaternion.LookRotation(dir);
-        targetEnemyScript.slowEffect.transform.position = targetEnemyTransform.position + dir.normalized;
+        enemyTargetScript.slowEffect.transform.rotation = Quaternion.LookRotation(dir);
+        enemyTargetScript.slowEffect.transform.position = enemyTargetTransform.position + dir.normalized;
     }
 
     // When the timer counts down, shoot
@@ -210,7 +210,7 @@ public class Turret : MonoBehaviour
         Bullet bullet = bulletGO.GetComponent<Bullet>();
         if(bullet != null)
         {
-            bullet.Seek(targetEnemyTransform);
+            bullet.Seek(enemyTargetTransform);
         }        
         
         fireCountdown = 1f / fireRate;
@@ -223,9 +223,9 @@ public class Turret : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, turretRange);
     }
 
-    // Remove the updating of the turret DPS when it's destroyed, so the ConfigManager doesn't call a function on an inexistant object
-    void OnDestroy()
-    {
-        ConfigManager.FetchCompleted -= SetTurretMaxDPS;
-    }
+    // // Remove the updating of the turret DPS when it's destroyed, so the ConfigManager doesn't call a function on an inexistant object
+    // void OnDestroy()
+    // {
+    //     ConfigManager.FetchCompleted -= SetTurretMaxDPS;
+    // }
 }

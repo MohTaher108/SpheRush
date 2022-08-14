@@ -3,17 +3,16 @@ using UnityEngine.UI;
 
 public class RightSideBar : MonoBehaviour
 {
+    [HideInInspector]
+    public bool isPaused;
+    [HideInInspector]
+    public bool doPathCheck; // If this value is set to true, the wave spawner will detect it and call PathCheck()
+    private bool isStarted; 
 
+    [Header("Unity Stuff")]
     public Sprite playButtonSprite;
     public Sprite pauseButtonSprite;
-    private bool isPaused;
-
-    // Check if game was ever played, to disable the pathCheckObject
-    private bool gameStart;
-
-    public Image image;
-
-    public WaveSpawner waveSpawner;
+    public Image playSprite;
 
     public GameObject HowToPlayUI;
 
@@ -22,8 +21,9 @@ public class RightSideBar : MonoBehaviour
     void Start()
     {
         isPaused = true;
-        waveSpawner.enabled = false;
-        image.sprite = playButtonSprite;
+        doPathCheck = false;
+        isStarted = false;
+        playSprite.sprite = playButtonSprite;
     }
 
     void Update()
@@ -35,23 +35,18 @@ public class RightSideBar : MonoBehaviour
     // Toggles the pause/play
     public void Toggle()
     {
-        // Disable path check if game starts
-        if(!gameStart)
+        if(!isStarted)
         {
+            isStarted = true;
             pathCheckObject.SetActive(false);
         }
 
         isPaused = !isPaused;
 
         if(isPaused)
-        {
-            waveSpawner.enabled = false;
-            image.sprite = playButtonSprite;
-        } else
-        {
-            waveSpawner.enabled = true;
-            image.sprite = pauseButtonSprite;
-        }
+            playSprite.sprite = playButtonSprite;
+        else
+            playSprite.sprite = pauseButtonSprite;
     }
 
     public void HowToPlay()
@@ -62,7 +57,7 @@ public class RightSideBar : MonoBehaviour
 
     public void PathCheck()
     {
-        waveSpawner.PathCheck();
+        doPathCheck = true;
         pathCheckObject.SetActive(false);
     }
 }

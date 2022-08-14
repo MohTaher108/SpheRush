@@ -50,10 +50,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c3789ad08800db44ab86400c24b294a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPaused: 0
+  doPathCheck: 0
   playButtonSprite: {fileID: 21300000, guid: ca7db6efe34f9ff4da599711ab23f381, type: 3}
   pauseButtonSprite: {fileID: 21300000, guid: 5e72a91df05d625468140aecf4c96fbb, type: 3}
-  image: {fileID: 1238589043}
-  waveSpawner: {fileID: 0}
+  playSprite: {fileID: 1238589043}
   HowToPlayUI: {fileID: 3504499280221527011}
   pathCheckObject: {fileID: 7750009027710328298}
 --- !u!1 &1238589041
@@ -1442,7 +1443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5d93f1cd65fd1948a1f18dd523421d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneFader: {fileID: 0}
+  isSecretLevel: 0
   levelNumber: 0
 --- !u!1 &7900710716913965649
 GameObject:
@@ -1616,6 +1617,7 @@ RectTransform:
   - {fileID: 7900710716789285786}
   - {fileID: 1052122278}
   - {fileID: 3504499280221527010}
+  - {fileID: 8471974318412217398}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1760,7 +1762,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b33644465be0a42ae506c21f13fc38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneFader: {fileID: 0}
 --- !u!1 &7900710717233199834
 GameObject:
   m_ObjectHideFlags: 0
@@ -2902,21 +2903,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 371ea93f049e029498fe0d5c347e5d89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  standardTurret:
-    prefab: {fileID: 6448829683375992554, guid: bfb050244b33cf84d93fb9e8107b6ce0, type: 3}
-    cost: 150
-    upgradedPrefab: {fileID: 6448829683375992554, guid: 7fd438771d154e54fa8479ab50aae9a3, type: 3}
-    upgradeCost: 120
-  missileLauncher:
-    prefab: {fileID: 4732519546070498536, guid: 07151ea2b2e0ae74b924db92fdd99102, type: 3}
-    cost: 250
-    upgradedPrefab: {fileID: 4732519546070498536, guid: db5df5ab7d73b9746ab608bf65ad22cc, type: 3}
-    upgradeCost: 200
-  laserBeamer:
-    prefab: {fileID: 4022585579280599204, guid: 4154e90376c7188469a8a939def492dc, type: 3}
-    cost: 350
-    upgradedPrefab: {fileID: 4022585579280599204, guid: 71b8aab375fdb314c983e75f56cc7a4e, type: 3}
-    upgradeCost: 300
+  standardTurret: {fileID: 6648683216234760814, guid: bfb050244b33cf84d93fb9e8107b6ce0, type: 3}
+  missileLauncher: {fileID: -7387406989131023916, guid: 07151ea2b2e0ae74b924db92fdd99102, type: 3}
+  laserBeamer: {fileID: -7170145618236739746, guid: 4154e90376c7188469a8a939def492dc, type: 3}
   standardTurretButton: {fileID: 7900710717734871804}
   missileLauncherButton: {fileID: 4374451035030302009}
   laserBeamerButton: {fileID: 4374451035040752481}
@@ -3888,7 +3877,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseUI: {fileID: 7900710718448124204}
-  sceneFader: {fileID: 0}
 --- !u!1 &7900710718558199150
 GameObject:
   m_ObjectHideFlags: 0
@@ -4461,6 +4449,82 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &8062044549585478608
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8471974318412217398}
+  - component: {fileID: 7871044029499034243}
+  - component: {fileID: 8878216105676476766}
+  m_Layer: 5
+  m_Name: FadeImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8471974318412217398
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8062044549585478608}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7900710717014289606}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 925, y: 443}
+  m_SizeDelta: {x: 1850, y: 886}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7871044029499034243
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8062044549585478608}
+  m_CullTransparentMesh: 1
+--- !u!114 &8878216105676476766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8062044549585478608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &8624089838414754526
 GameObject:
   m_ObjectHideFlags: 0
@@ -4532,6 +4596,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7900710717014289606}
     m_Modifications:
+    - target: {fileID: 2218306457827194056, guid: 4f5b96dbfbef7f04fa217b4828bae73d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -27.500732
+      objectReference: {fileID: 0}
     - target: {fileID: 2218306458167986728, guid: 4f5b96dbfbef7f04fa217b4828bae73d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4642,6 +4710,10 @@ PrefabInstance:
     - target: {fileID: 2238075640012035368, guid: 575098d91be4ad645baeeaed2d916ebf, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 55.349
+      objectReference: {fileID: 0}
+    - target: {fileID: 2623444765688700628, guid: 575098d91be4ad645baeeaed2d916ebf, type: 3}
+      propertyPath: m_text
+      value: $150
       objectReference: {fileID: 0}
     - target: {fileID: 5841690452140255440, guid: 575098d91be4ad645baeeaed2d916ebf, type: 3}
       propertyPath: m_Name

@@ -7,70 +7,83 @@ using TMPro;
 
 public class WaveSpawner : MonoBehaviour
 {
-    public TextAsset waveDataFile;
     private string[] waveData;
     private static Wave currentWave;
-
-    private static int EnemiesAlive;
-
-    [Header("Waves timer")]
-    public float timeBetweenWaves = 2f;
-    private float countdown;
+    private bool isWavePaused { get { return gameManager.rightSideBar.isPaused; } }
+    private bool doPathCheck { get { return gameManager.rightSideBar.doPathCheck; } }
+    private bool begunNextWave;
 
     [Header("Unity Stuff")]
     public Transform enemySpawnPoint;
-    public TextMeshProUGUI waveCountdownText;
     public GameManager gameManager;
 
+    [HideInInspector]
     public GameObject Enemy_Fast;
+    [HideInInspector]
     public GameObject Enemy_Simple;
+    [HideInInspector]
     public GameObject Enemy_Tough;
+    [HideInInspector]
     public GameObject Enemy_Fake;
 
     void Start()
     {
-        countdown = 0;
-        EnemiesAlive = 0;
-        // Open wave data .txt file
+        begunNextWave = false;
+        currentWave = null;
+        
+        // Load the waveData for the level
+        TextAsset waveDataFile = Resources.Load<TextAsset>("LevelWaves/" + SceneManager.GetActiveScene().name);
         waveData = waveDataFile.text.Split(new string[] { "\n" }, StringSplitOptions.None);
+        GameStats.WaveCount = waveData.Length;
+
+        Enemy_Fast = Resources.Load<GameObject>("Enemies/Types/Enemy_Fast");
+        Enemy_Simple = Resources.Load<GameObject>("Enemies/Types/Enemy_Simple");
+        Enemy_Tough = Resources.Load<GameObject>("Enemies/Types/Enemy_Tough");
+        Enemy_Fake = Resources.Load<GameObject>("Enemies/Types/Enemy_Fake");
     }
 
     void Update()
     {
+        if(doPathCheck)
+        {
+            gameManager.rightSideBar.doPathCheck = false;
+            PathCheck();
+        }
+
         // Wait till wave is completed
-        if(EnemiesAlive > 0)
-        {
+        if(GameStats.EnemiesAlive > 0 || PlayerStats.Lives <= 0 || (currentWave != null && currentWave.count > 0))
             return;
-        }
 
-        // Has the player finished all levels? (include lives check, because player wins otherwise when level ends as last enemy reaches the end)
-        if(PlayerStats.Rounds == waveData.Length && PlayerStats.Lives > 0)
+        if(begunNextWave)
         {
-            gameManager.WinLevel();
-            this.enabled = false;
+            begunNextWave = false;
+            PlayerStats.Money += currentWave.moneyGained;
+            PlayerStats.Rounds++;
+
+            if(PlayerStats.Rounds == waveData.Length)
+            {
+                gameManager.WinLevel();
+                this.enabled = false;
+                return;
+            }
         }
 
-        // Decrement countdown, disallow it from becoming negative, and update the countdown text overlay
-        countdown -= Time.deltaTime;
-        countdown = Mathf.Clamp(countdown, 0f, Mathf.Infinity);
-        waveCountdownText.text = string.Format("{0:00.00}", countdown);
-
-        // Spawn a wave when countdown hits 0
-        if(countdown <= 0f)
+        if(!isWavePaused)
         {
             StartCoroutine(SpawnWave());
-            countdown = timeBetweenWaves;
+            begunNextWave = true;
         }
     }
 
     IEnumerator SpawnWave()
     {
-        currentWave = new Wave(waveData, Enemy_Simple, Enemy_Fast, Enemy_Tough);
+        currentWave = new Wave(waveData, this);
         
-        for (int i = 0; i < currentWave.count; i++)
+        while(currentWave.count > 0)
         {
             SpawnEnemy(currentWave.enemyPrefab);
-            EnemiesAlive++;
+            GameStats.EnemiesAlive++;
+            currentWave.count--;
             yield return new WaitForSeconds(1f / currentWave.rate); // Wait 1/rate time between spawning each enemy
         }
     }
@@ -83,18 +96,6 @@ public class WaveSpawner : MonoBehaviour
     public void PathCheck()
     {
         Instantiate(Enemy_Fake, enemySpawnPoint.position, enemySpawnPoint.rotation);
-    }
-
-    // Report that an enemy died and give the player money if they finished the wave
-    public static void enemyDied()
-    {
-        EnemiesAlive--;
-
-        if(EnemiesAlive <= 0)
-        {
-            PlayerStats.Rounds++;
-            PlayerStats.Money += currentWave.moneyGained;
-        }
     }
 
 }

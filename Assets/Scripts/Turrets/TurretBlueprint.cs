@@ -1,19 +1,18 @@
 using UnityEngine;
 
-[System.Serializable]
-public class TurretBlueprint
+public class TurretBlueprint : MonoBehaviour
 {
-    // Our turret information
     public GameObject prefab;
     public int cost;
+    public int value;
 
-    // Our upgraded turret information
-    public GameObject upgradedPrefab;
-    public int upgradeCost;
+    public TurretBlueprint upgradedTurretBlueprint;
+    public bool maxUpgrade { get { return upgradedTurretBlueprint == null; } }
+    public bool isUpgradable { get { return !maxUpgrade && PlayerStats.Money >= upgradedTurretBlueprint.cost; } }
 
-    // Get how much the turret sells for (I kept this here, so we know where the sell price was modified)
-    public int GetSellAmount(bool isUpgraded)
+    // Return 70% of the original value
+    public int GetSellAmount()
     {
-        return (cost / 2) + ((isUpgraded) ? (upgradeCost / 2) : 0);
+        return (value * 7) / 10;
     }
 }

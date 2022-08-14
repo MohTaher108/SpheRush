@@ -5,8 +5,6 @@ public class PauseMenu : MonoBehaviour
 {
     
     public GameObject pauseUI;
-
-    public SceneFader sceneFader;
     
     // Toggle the pause menu
     public void Toggle()
@@ -28,14 +26,14 @@ public class PauseMenu : MonoBehaviour
     public void Retry()
     {
         Toggle();
-        sceneFader.FadeTo(SceneManager.GetActiveScene().name);
+        SceneFader.instance.FadeTo(SceneManager.GetActiveScene().name);
     }
 
     // Go back to main menu
     public void Menu()
     {
         Toggle();
-        sceneFader.FadeTo(SceneFader.menuSceneName);
+        SceneFader.instance.FadeTo(SceneFader.menuSceneName);
     }
 
 }

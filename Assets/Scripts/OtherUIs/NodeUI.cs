@@ -20,15 +20,14 @@ public class NodeUI : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Comma) && PlayerStats.Money >= target.turretBlueprint.upgradeCost)
-        {
+        if(target == null)
+            return;
+
+        if(Input.GetKeyDown(KeyCode.Comma) && target.turretBlueprint.isUpgradable)
             Upgrade();
-        }
         
         if(Input.GetKeyDown(KeyCode.Period))
-        {
             Sell();
-        }
     }
 
     // Set the target we're pointing at, and put the upgradeUI above them
@@ -38,10 +37,10 @@ public class NodeUI : MonoBehaviour
 
         transform.position = target.GetBuildPosition();
 
-        // If target isn't upgraded, display cost and UI
-        if(!target.turretScript.isUpgraded) 
+        // If target isn't fully upgraded, display cost and UI
+        if(!target.turretBlueprint.maxUpgrade) 
         {
-            upgradeCost.text = "$" + target.turretBlueprint.upgradeCost;
+            upgradeCost.text = "$" + target.turretBlueprint.upgradedTurretBlueprint.cost;
             // Check if the user has enough money to upgrade the turret
             StartCoroutine(checkMoney());
         } else // If target is upgraded, display "DONE" and disallow clicking the upgradeButton
@@ -51,7 +50,7 @@ public class NodeUI : MonoBehaviour
         }
 
         // Display sell amount
-        sellAmount.text = "$" + target.turretBlueprint.GetSellAmount(target.turretScript.isUpgraded);
+        sellAmount.text = "$" + target.turretBlueprint.GetSellAmount();
 
         ui.SetActive(true);
     }
@@ -64,7 +63,7 @@ public class NodeUI : MonoBehaviour
 
         while(!hideCoroutineCheck)
         {
-            if(PlayerStats.Money >= target.turretBlueprint.upgradeCost)
+            if(target.turretBlueprint.isUpgradable)
             {
                 upgradeButton.interactable = true;
                 hideCoroutineCheck = true;
@@ -83,14 +82,13 @@ public class NodeUI : MonoBehaviour
     public void Upgrade() 
     {
         target.UpgradeTurret();
-        // Deselect node since we're done working with it
         BuildManager.instance.DeselectNode();
     }
 
     public void Sell()
     {
         target.SellTurret();
-        // Deselect node since we're done working with it
+        target = null;
         BuildManager.instance.DeselectNode();
     }
 

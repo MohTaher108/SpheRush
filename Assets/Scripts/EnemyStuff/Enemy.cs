@@ -80,7 +80,7 @@ public class Enemy : MonoBehaviour
         Destroy(effect, 5f);
 
         // Report an enemy death
-        WaveSpawner.enemyDied();
+        GameStats.EnemiesAlive--;
 
         // Destroy enemy
         Destroy(gameObject);

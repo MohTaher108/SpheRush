@@ -13,7 +13,7 @@ public class Wave
     public int moneyGained;
 
     // Parse Wave Info
-    public Wave(String[] waveData, GameObject Enemy_Simple, GameObject Enemy_Fast, GameObject Enemy_Tough)
+    public Wave(String[] waveData, WaveSpawner waveSpawner)
     {
         string curNumString; // A temporary string to extract numbers out of the wave data
         string curWaveData = waveData[PlayerStats.Rounds];
@@ -36,11 +36,11 @@ public class Wave
             // Read in the enemy type
             curChar = curWaveData[curWaveDataIndex++];
             if(curChar == 'S')
-                enemyPrefab = Enemy_Simple;
+                enemyPrefab = waveSpawner.Enemy_Simple;
             else if(curChar == 'F')
-                enemyPrefab = Enemy_Fast;
+                enemyPrefab = waveSpawner.Enemy_Fast;
             else if(curChar == 'T')
-                enemyPrefab = Enemy_Tough;
+                enemyPrefab = waveSpawner.Enemy_Tough;
             curWaveDataIndex++; // Skip comma
 
             // Read in the enemy count

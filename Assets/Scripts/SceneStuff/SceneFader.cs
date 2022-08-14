@@ -5,15 +5,29 @@ using System.Collections;
 
 public class SceneFader : MonoBehaviour
 {
-    // Reference to the main menu scene name for loading it
+    // Singleton
+    public static SceneFader instance;
+
     public const string menuSceneName = "MainMenu";
-    // Reference to the level select scene name for loading it
     public const string levelSelectSceneName = "LevelSelect";
+    public const string secretLevelSceneName = "SecretLevel";
     
     // Reference to the black image that hides the game
-    public Image img;
+    public Image fadeImage;
     // Create an animation curve that allows a customized fade in/out
     public AnimationCurve curve;
+
+    void Awake()
+    {
+        // Print an error if a second BuildManager is ever made accidentally
+        if(instance != null)
+        {
+            Debug.LogError("More than one SceneFader in scene!");
+            return;
+        }
+
+        instance = this;
+    }
 
     void Start()
     {
@@ -29,7 +43,7 @@ public class SceneFader : MonoBehaviour
         {
             currentTime -= Time.deltaTime;
             float newAlpha = curve.Evaluate(currentTime);
-            img.color = new Color(0f, 0f, 0f, newAlpha); // Change the img's alpha (can't change the alpha alone so gotta generate a new color)
+            fadeImage.color = new Color(0f, 0f, 0f, newAlpha); // Change the fadeImage's alpha (can't change the alpha alone so gotta generate a new color)
             yield return 0; // Skip to next frame
         }
     }
@@ -55,7 +69,7 @@ public class SceneFader : MonoBehaviour
         {
             currentTime += Time.deltaTime;
             float newAlpha = curve.Evaluate(currentTime);
-            img.color = new Color(0f, 0f, 0f, newAlpha); // Change the img's alpha (can't change the alpha alone so gotta generate a new color)
+            fadeImage.color = new Color(0f, 0f, 0f, newAlpha); // Change the fadeImage's alpha (can't change the alpha alone so gotta generate a new color)
             yield return 0; // Skip to next frame
         }
 
@@ -72,7 +86,7 @@ public class SceneFader : MonoBehaviour
         {
             currentTime += Time.deltaTime;
             float newAlpha = curve.Evaluate(currentTime);
-            img.color = new Color(0f, 0f, 0f, newAlpha); // Change the img's alpha (can't change the alpha alone so gotta generate a new color)
+            fadeImage.color = new Color(0f, 0f, 0f, newAlpha); // Change the fadeImage's alpha (can't change the alpha alone so gotta generate a new color)
             yield return 0; // Skip to next frame
         }
 

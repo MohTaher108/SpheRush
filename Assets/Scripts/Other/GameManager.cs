@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     private GameObject gameOverUI;
     private GameObject completeLevelUI;
     private PauseMenu pauseMenu;
+    [HideInInspector]
+    public RightSideBar rightSideBar;
 
     public int levelNumber;
 
@@ -20,6 +22,7 @@ public class GameManager : MonoBehaviour
         gameOverUI = overlayCanvas.transform.Find("GameOver").gameObject;
         completeLevelUI = overlayCanvas.transform.Find("CompleteLevel").gameObject;        
         pauseMenu = overlayCanvas.transform.Find("PauseMenu").gameObject.GetComponent<PauseMenu>();
+        rightSideBar = overlayCanvas.transform.Find("RightSideBar").gameObject.GetComponent<RightSideBar>();
 
         // Initilaize the levelNumber in completeLevel so we know whether the level has been previously completed or not
         CompleteLevel CompleteLevelScript = completeLevelUI.GetComponent<CompleteLevel>();

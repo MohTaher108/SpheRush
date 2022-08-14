@@ -4938,6 +4938,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4366460741940761118}
   - component: {fileID: 916683223508987289}
+  - component: {fileID: -4019020376550106568}
   - component: {fileID: 7436219734449360676}
   m_Layer: 0
   m_Name: LaserBeamer_Upgraded
@@ -4980,16 +4981,31 @@ MonoBehaviour:
   bulletPrefab: {fileID: 6046335810056437449, guid: 69a6b2e210f824e42a68b7f78f94715d, type: 3}
   fireRate: 1
   useLaser: 1
-  maxDPS: 75
-  maxTime: 2.5
+  PercentDamage: 1
+  maxDPS: 105
+  maxTime: 1
   slowAmount: 0.8
   impactEffect: {fileID: 4376905230382414973}
   impactLight: {fileID: 5220082913593962149}
   lineRenderer: {fileID: 7436219734449360676}
   partToRotate: {fileID: 4353948680804703152}
-  turnSpeed: 10
-  enemyTag: Enemy
   firePoint: {fileID: 8089230603466786115}
+--- !u!114 &-4019020376550106568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4022585579280599204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ba947cc5056d7746a2f09d10e07043d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 4022585579280599204}
+  cost: 300
+  value: 650
+  upgradedTurretBlueprint: {fileID: 0}
 --- !u!120 &7436219734449360676
 LineRenderer:
   m_ObjectHideFlags: 0

@@ -3,8 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class CompleteLevel : MonoBehaviour
 {
-    public SceneFader sceneFader;
-
+    
     public bool isSecretLevel = false;
 
     [HideInInspector]
@@ -24,16 +23,16 @@ public class CompleteLevel : MonoBehaviour
     {
         if(isSecretLevel)
         {
-            sceneFader.FadeTo(SceneFader.levelSelectSceneName);
+            SceneFader.instance.FadeTo(SceneFader.levelSelectSceneName);
             return;
         }
 
-        sceneFader.FadeTo(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneFader.instance.FadeTo(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void Menu()
     {
-        sceneFader.FadeTo(SceneFader.menuSceneName);
+        SceneFader.instance.FadeTo(SceneFader.menuSceneName);
     }
     
 }

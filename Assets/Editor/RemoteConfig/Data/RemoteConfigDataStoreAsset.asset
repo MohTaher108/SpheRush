@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
   m_Name: RemoteConfigDataStoreAsset
   m_EditorClassIdentifier: 
-  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"390f4b6a-3b96-4969-83d9-52abca42bcf2\"\r\n   
+  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"4b45a8d1-c041-4427-ac8b-660a6a6afe58\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"LaserTurretMaxDPS\",\r\n      \"type\":
     \"float\",\r\n      \"value\": 60.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"67a7b461-db7e-4248-b00b-4e90db1b8116\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"13e6a6de-f845-4529-8f9c-45e28ea987c6\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"LaserTurretUpgradedMaxDPS\",\r\n      \"type\":
     \"float\",\r\n      \"value\": 90.0\r\n    }\r\n  }\r\n]"
-  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"390f4b6a-3b96-4969-83d9-52abca42bcf2\"\r\n   
+  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"4b45a8d1-c041-4427-ac8b-660a6a6afe58\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"LaserTurretMaxDPS\",\r\n      \"type\":
     \"float\",\r\n      \"value\": 60.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"67a7b461-db7e-4248-b00b-4e90db1b8116\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"13e6a6de-f845-4529-8f9c-45e28ea987c6\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"LaserTurretUpgradedMaxDPS\",\r\n      \"type\":
     \"float\",\r\n      \"value\": 90.0\r\n    }\r\n  }\r\n]"
   _environments: "[\r\n  {\r\n    \"projectId\": \"fec52645-0faa-4b84-bcec-1ca9798946f3\",\r\n   

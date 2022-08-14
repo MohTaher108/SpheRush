@@ -212,6 +212,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5923650511578248272}
   - component: {fileID: 4050295501664107947}
+  - component: {fileID: -1164834661775231033}
   m_Layer: 0
   m_Name: StandardTurret_Upgraded
   m_TagString: Untagged
@@ -249,6 +250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretRange: 17
+  isUpgraded: 0
   bulletPrefab: {fileID: 6046335810056437449, guid: 3fc727501cd006a4bab54b94f5b9d255, type: 3}
   fireRate: 1.5
   useLaser: 0
@@ -262,6 +264,22 @@ MonoBehaviour:
   turnSpeed: 10
   enemyTag: Enemy
   firePoint: {fileID: 1409991452301871398}
+--- !u!114 &-1164834661775231033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6448829683375992554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ba947cc5056d7746a2f09d10e07043d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 6448829683375992554}
+  cost: 120
+  value: 270
+  upgradedTurretBlueprint: {fileID: 0}
 --- !u!1 &8549931747448601818
 GameObject:
   m_ObjectHideFlags: 0
