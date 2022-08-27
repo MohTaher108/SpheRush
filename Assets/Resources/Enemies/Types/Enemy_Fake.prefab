@@ -368,7 +368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startHealth: 1000000
-  startSpeed: 30
+  startSpeed: 40
   speed: 10
   worth: 2147483647
   LivesCount: 0
@@ -376,7 +376,7 @@ MonoBehaviour:
   slowTimerStart: 3
   slowTimer: 0
   healthBar: {fileID: 1782337730516210573}
-  deathEffect: {fileID: 6330570969255664859, guid: e8b60adadf13e8446910c4e877b3be7c, type: 3}
+  deathEffect: {fileID: 6330570969255664859, guid: 2d3fcf32e2c44b143a1ac574cf93b2fc, type: 3}
   slowEffect: {fileID: 6082043305036409747}
 --- !u!114 &140901849400145563
 MonoBehaviour:

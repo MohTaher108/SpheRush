@@ -71,12 +71,14 @@ public class GameManager : MonoBehaviour
 
     void EndGame()
     {
+        AudioManager.instance.Play("GameOver");
         GameIsOver = true;
         gameOverUI.SetActive(true);
     }
 
     public void WinLevel()
     {
+        AudioManager.instance.Play("LevelComplete");
         GameIsOver = true;
         completeLevelUI.SetActive(true);
     }

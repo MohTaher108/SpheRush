@@ -23,15 +23,18 @@ public class CompleteLevel : MonoBehaviour
     {
         if(isSecretLevel)
         {
+            AudioManager.instance.Play("LevelSelect");
             SceneFader.instance.FadeTo(SceneFader.levelSelectSceneName);
             return;
         }
 
+        AudioManager.instance.Play("LevelSelect");
         SceneFader.instance.FadeTo(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void Menu()
     {
+        AudioManager.instance.Play("LevelSelect");
         SceneFader.instance.FadeTo(SceneFader.menuSceneName);
     }
     

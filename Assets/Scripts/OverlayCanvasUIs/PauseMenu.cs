@@ -26,6 +26,7 @@ public class PauseMenu : MonoBehaviour
     public void Retry()
     {
         Toggle();
+        AudioManager.instance.Play("LevelSelect");
         SceneFader.instance.FadeTo(SceneManager.GetActiveScene().name);
     }
 
@@ -33,6 +34,7 @@ public class PauseMenu : MonoBehaviour
     public void Menu()
     {
         Toggle();
+        AudioManager.instance.Play("LevelSelect");
         SceneFader.instance.FadeTo(SceneFader.menuSceneName);
     }
 

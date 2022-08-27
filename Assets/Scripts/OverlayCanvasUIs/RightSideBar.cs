@@ -8,6 +8,8 @@ public class RightSideBar : MonoBehaviour
     [HideInInspector]
     public bool doPathCheck; // If this value is set to true, the wave spawner will detect it and call PathCheck()
     private bool isStarted; 
+    [HideInInspector]
+    public GameObject pathCheckEnemy;
 
     [Header("Unity Stuff")]
     public Sprite playButtonSprite;
@@ -16,7 +18,7 @@ public class RightSideBar : MonoBehaviour
 
     public GameObject HowToPlayUI;
 
-    public GameObject pathCheckObject;
+    public GameObject pathCheckButton;
 
     void Start()
     {
@@ -37,8 +39,11 @@ public class RightSideBar : MonoBehaviour
     {
         if(!isStarted)
         {
+            if(pathCheckEnemy != null)
+                Destroy(pathCheckEnemy);
+
             isStarted = true;
-            pathCheckObject.SetActive(false);
+            pathCheckButton.SetActive(false);
         }
 
         isPaused = !isPaused;
@@ -58,6 +63,6 @@ public class RightSideBar : MonoBehaviour
     public void PathCheck()
     {
         doPathCheck = true;
-        pathCheckObject.SetActive(false);
+        pathCheckButton.SetActive(false);
     }
 }

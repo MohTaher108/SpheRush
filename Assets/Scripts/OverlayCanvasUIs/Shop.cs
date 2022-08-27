@@ -17,7 +17,7 @@ public class Shop : MonoBehaviour
     public Button laserBeamerButton;
 
     // Instance of BuildManager so the script can set the turret to build to one of the blueprints
-    BuildManager buildManager;
+    private BuildManager buildManager;
     
     void Start() 
     {
@@ -76,15 +76,18 @@ public class Shop : MonoBehaviour
     public void SelectStandardTurret()
     {
         buildManager.SetTurretToBuilt(standardTurret);
+        AudioManager.instance.Play("SelectStandardTurret");
     }
 
     public void SelectMissileLauncher()
     {
         buildManager.SetTurretToBuilt(missileLauncher);
+        AudioManager.instance.Play("SelectMissileLauncher");
     }
 
     public void SelectLaserBeamer()
     {
         buildManager.SetTurretToBuilt(laserBeamer);
+        AudioManager.instance.Play("SelectLaserBeamer");
     }
 }

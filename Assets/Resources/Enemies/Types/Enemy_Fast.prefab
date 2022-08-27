@@ -372,6 +372,7 @@ MonoBehaviour:
   speed: 10
   worth: 2
   LivesCount: 1
+  isFake: 0
   slowTimerStart: 3
   slowTimer: 0
   healthBar: {fileID: 1782337730516210573}

@@ -43,22 +43,27 @@ public class LevelSelector : MonoBehaviour
             || (Input.GetKeyDown(KeyCode.R) && secretLevelKey == 3) || (Input.GetKeyDown(KeyCode.E) && secretLevelKey == 4))
         {
             secretLevelKey++;
+            AudioManager.instance.Play("CorrectSecretCodeInput");
         } else if((Input.GetKeyDown(KeyCode.T) && secretLevelKey == 5)) // If the user finished the word, load the secret level
         {
+            AudioManager.instance.Play("LevelSelect");
             SceneFader.instance.FadeTo(SceneFader.secretLevelSceneName);
         } else if(Input.anyKeyDown) // If the user hits the wrong button, reset their progress
         {
+            AudioManager.instance.Play("IncorrectSecretCodeInput");
             secretLevelKey = 0;
         }
     }
 
     public void SelectLevel(string levelName)
     {
+        AudioManager.instance.Play("LevelSelect");
         SceneFader.instance.FadeTo(levelName);
     }
 
     public void Menu()
     {
+        AudioManager.instance.Play("LevelSelect");
         SceneFader.instance.FadeTo(SceneFader.menuSceneName);
     }
 

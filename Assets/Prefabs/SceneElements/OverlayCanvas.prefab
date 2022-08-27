@@ -52,11 +52,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPaused: 0
   doPathCheck: 0
+  pathCheckEnemy: {fileID: 0}
   playButtonSprite: {fileID: 21300000, guid: ca7db6efe34f9ff4da599711ab23f381, type: 3}
   pauseButtonSprite: {fileID: 21300000, guid: 5e72a91df05d625468140aecf4c96fbb, type: 3}
   playSprite: {fileID: 1238589043}
   HowToPlayUI: {fileID: 3504499280221527011}
-  pathCheckObject: {fileID: 7750009027710328298}
+  pathCheckButton: {fileID: 7750009027710328298}
 --- !u!1 &1238589041
 GameObject:
   m_ObjectHideFlags: 0

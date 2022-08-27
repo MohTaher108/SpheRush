@@ -47,7 +47,7 @@ public class WaveSpawner : MonoBehaviour
         if(doPathCheck)
         {
             gameManager.rightSideBar.doPathCheck = false;
-            PathCheck();
+            gameManager.rightSideBar.pathCheckEnemy = SpawnEnemy(Enemy_Fake);
         }
 
         // Wait till wave is completed
@@ -66,6 +66,8 @@ public class WaveSpawner : MonoBehaviour
                 this.enabled = false;
                 return;
             }
+
+            AudioManager.instance.Play("WaveComplete");
         }
 
         if(!isWavePaused)
@@ -88,14 +90,8 @@ public class WaveSpawner : MonoBehaviour
         }
     }
 
-    void SpawnEnemy(GameObject enemy)
+    GameObject SpawnEnemy(GameObject enemy)
     {
-        Instantiate(enemy, enemySpawnPoint.position, enemySpawnPoint.rotation);
+        return Instantiate(enemy, enemySpawnPoint.position, enemySpawnPoint.rotation);
     }
-
-    public void PathCheck()
-    {
-        Instantiate(Enemy_Fake, enemySpawnPoint.position, enemySpawnPoint.rotation);
-    }
-
 }

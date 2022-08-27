@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
+        AudioManager.instance.Play("LevelSelect");
         SceneFader.instance.FadeTo(SceneFader.levelSelectSceneName);
     }
     public void Quit()

@@ -50,6 +50,7 @@ public class EnemyMovement : MonoBehaviour
         {
             PlayerStats.Lives -= enemy.LivesCount;
             GameStats.EnemiesAlive--;
+            AudioManager.instance.Play("LifeLost");
         }
         Destroy(gameObject);
     }

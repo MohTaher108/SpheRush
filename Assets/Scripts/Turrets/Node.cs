@@ -69,6 +69,7 @@ public class Node : MonoBehaviour
         PlayerStats.Money -= blueprint.cost;
 
         // Instantiate turret
+        AudioManager.instance.Play("TurretPlaced");
         GameObject _turret = (GameObject) Instantiate(blueprint.prefab, GetBuildPosition(), Quaternion.identity);
         turret = _turret;
         turretScript = _turret.GetComponent<TurretShooting>();
@@ -87,6 +88,7 @@ public class Node : MonoBehaviour
         Destroy(turret);
 
         // Instantiate upgraded turret
+        AudioManager.instance.Play("TurretUpgraded");
         GameObject _turret = (GameObject) Instantiate(turretBlueprint.upgradedTurretBlueprint.prefab, GetBuildPosition(), Quaternion.identity);
         turret = _turret;
         turretScript = _turret.GetComponent<TurretShooting>();
