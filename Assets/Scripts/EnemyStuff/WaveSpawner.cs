@@ -2,8 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
 using System.Collections;
-using System.IO;
-using TMPro;
+using System.Collections.Generic;
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -17,14 +16,7 @@ public class WaveSpawner : MonoBehaviour
     public Transform enemySpawnPoint;
     public GameManager gameManager;
 
-    [HideInInspector]
-    public GameObject Enemy_Fast;
-    [HideInInspector]
-    public GameObject Enemy_Simple;
-    [HideInInspector]
-    public GameObject Enemy_Tough;
-    [HideInInspector]
-    public GameObject Enemy_Fake;
+    private Dictionary<string, GameObject> enemyPrefabs = new Dictionary<string, GameObject>();
 
     void Start()
     {
@@ -36,10 +28,12 @@ public class WaveSpawner : MonoBehaviour
         waveData = waveDataFile.text.Split(new string[] { "\n" }, StringSplitOptions.None);
         GameStats.WaveCount = waveData.Length;
 
-        Enemy_Fast = Resources.Load<GameObject>("Enemies/Types/Enemy_Fast");
-        Enemy_Simple = Resources.Load<GameObject>("Enemies/Types/Enemy_Simple");
-        Enemy_Tough = Resources.Load<GameObject>("Enemies/Types/Enemy_Tough");
-        Enemy_Fake = Resources.Load<GameObject>("Enemies/Types/Enemy_Fake");
+        enemyPrefabs["Fast"] = Resources.Load<GameObject>("Enemies/Types/Enemy_Fast");
+        enemyPrefabs["Simple"] = Resources.Load<GameObject>("Enemies/Types/Enemy_Simple");
+        enemyPrefabs["Tough"] = Resources.Load<GameObject>("Enemies/Types/Enemy_Tough");
+        enemyPrefabs["Fake"] = Resources.Load<GameObject>("Enemies/Types/Enemy_Fake");
+        enemyPrefabs["Witch"] = Resources.Load<GameObject>("Enemies/Types/Enemy_Witch");
+        enemyPrefabs["Skeleton"] = Resources.Load<GameObject>("Enemies/Types/Enemy_Skeleton");
     }
 
     void Update()
@@ -47,7 +41,7 @@ public class WaveSpawner : MonoBehaviour
         if(doPathCheck)
         {
             gameManager.rightSideBar.doPathCheck = false;
-            gameManager.rightSideBar.pathCheckEnemy = SpawnEnemy(Enemy_Fake);
+            gameManager.rightSideBar.pathCheckEnemy = SpawnEnemy(enemyPrefabs["Fake"]);
         }
 
         // Wait till wave is completed
@@ -79,12 +73,11 @@ public class WaveSpawner : MonoBehaviour
 
     IEnumerator SpawnWave()
     {
-        currentWave = new Wave(waveData, this);
+        currentWave = new Wave(waveData, enemyPrefabs);
         
         while(currentWave.count > 0)
         {
             SpawnEnemy(currentWave.enemyPrefab);
-            GameStats.EnemiesAlive++;
             currentWave.count--;
             yield return new WaitForSeconds(1f / currentWave.rate); // Wait 1/rate time between spawning each enemy
         }
@@ -92,6 +85,7 @@ public class WaveSpawner : MonoBehaviour
 
     GameObject SpawnEnemy(GameObject enemy)
     {
+        GameStats.EnemiesAlive++;
         return Instantiate(enemy, enemySpawnPoint.position, enemySpawnPoint.rotation);
     }
 }

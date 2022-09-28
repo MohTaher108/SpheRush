@@ -2926,10 +2926,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawnPoint: {fileID: 1945725308}
   gameManager: {fileID: 371525986}
-  Enemy_Fast: {fileID: 4280253242193954910, guid: 61e804841ff4fa44cb3252b65f0c497a, type: 3}
-  Enemy_Simple: {fileID: 4280253242193954910, guid: 3abedd4ffa459d74aa1db52c4780506c, type: 3}
-  Enemy_Tough: {fileID: 4280253242193954910, guid: 621afd9ac672e224fa06e0c70fad1f4d, type: 3}
-  Enemy_Fake: {fileID: 4280253242193954910, guid: d606283eabcfa324b8f8f87811cbb6fe, type: 3}
 --- !u!4 &371525983
 Transform:
   m_ObjectHideFlags: 0

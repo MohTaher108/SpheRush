@@ -963,7 +963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0f6d66d8cc1ded49829db3a9c149cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HowToPlayUI: {fileID: 3062329879665295408}
+  HowToPlayUIScript: {fileID: 3062329879665295410}
 --- !u!4 &968761312
 Transform:
   m_ObjectHideFlags: 0
@@ -1133,6 +1133,10 @@ PrefabInstance:
     - target: {fileID: 8300066224430747173, guid: 13a980406a1760d46a2495d1549b40b9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8300066224430747174, guid: 13a980406a1760d46a2495d1549b40b9, type: 3}
+      propertyPath: sounds.Array.data[2].pitch
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 8300066224430747175, guid: 13a980406a1760d46a2495d1549b40b9, type: 3}
       propertyPath: m_Name
@@ -2210,6 +2214,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HowToPlay
       objectReference: {fileID: 0}
+    - target: {fileID: 2218306458167986729, guid: 4f5b96dbfbef7f04fa217b4828bae73d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f5b96dbfbef7f04fa217b4828bae73d, type: 3}
 --- !u!224 &3062329879665295407 stripped
@@ -2217,11 +2225,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2218306458167986728, guid: 4f5b96dbfbef7f04fa217b4828bae73d, type: 3}
   m_PrefabInstance: {fileID: 3062329879665295406}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &3062329879665295408 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2218306458167986729, guid: 4f5b96dbfbef7f04fa217b4828bae73d, type: 3}
+--- !u!114 &3062329879665295410 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2218306458167986727, guid: 4f5b96dbfbef7f04fa217b4828bae73d, type: 3}
   m_PrefabInstance: {fileID: 3062329879665295406}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e90ec39966222684098d8481854e1323, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!23 &5188598232812847207
 MeshRenderer:
   m_ObjectHideFlags: 0

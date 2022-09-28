@@ -1,6 +1,6 @@
 using UnityEngine;
 using System;
-using System.IO;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class Wave
@@ -13,7 +13,7 @@ public class Wave
     public int moneyGained;
 
     // Parse Wave Info
-    public Wave(String[] waveData, WaveSpawner waveSpawner)
+    public Wave(String[] waveData, Dictionary<string, GameObject> enemyPrefabs)
     {
         string curNumString; // A temporary string to extract numbers out of the wave data
         string curWaveData = waveData[PlayerStats.Rounds];
@@ -34,14 +34,14 @@ public class Wave
         for(; curWaveDataIndex < curWaveData.Length; curWaveDataIndex++)
         {
             // Read in the enemy type
+            curNumString = "";
             curChar = curWaveData[curWaveDataIndex++];
-            if(curChar == 'S')
-                enemyPrefab = waveSpawner.Enemy_Simple;
-            else if(curChar == 'F')
-                enemyPrefab = waveSpawner.Enemy_Fast;
-            else if(curChar == 'T')
-                enemyPrefab = waveSpawner.Enemy_Tough;
-            curWaveDataIndex++; // Skip comma
+            while(curChar != ',')
+            {
+                curNumString += curChar;
+                curChar = curWaveData[curWaveDataIndex++];
+            }
+            enemyPrefab = enemyPrefabs[curNumString];
 
             // Read in the enemy count
             curNumString = "";

@@ -4,11 +4,10 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     
-    public GameObject HowToPlayUI;
+    public HowToPlay HowToPlayUIScript;
 
     public void Play()
     {
-        AudioManager.instance.Play("LevelSelect");
         SceneFader.instance.FadeTo(SceneFader.levelSelectSceneName);
     }
     public void Quit()
@@ -18,7 +17,7 @@ public class MainMenu : MonoBehaviour
 
     public void HowToPlay()
     {
-        HowToPlayUI.SetActive(true);
+        HowToPlayUIScript.Activate();
     }
 
     public void Reset()

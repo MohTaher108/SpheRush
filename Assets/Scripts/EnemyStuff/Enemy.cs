@@ -16,15 +16,14 @@ public class Enemy : MonoBehaviour
     // Money the user gains when the enemy dies
     public int worth = 50;
     public int LivesCount = 1;
-
-    // Check to see if it's a fake enemy, which doesn't count as a life
-    public bool isFake = false;
+    [HideInInspector]
+    public bool noLifeCount { get { return LivesCount == 0; } }
 
     [Header("Slow stuff")]
     // Slow lingering effect
-    public float slowTimerStart = 3f;
-    [HideInInspector]
-    public float slowTimer;
+    public bool unSlowable;
+    private float slowTimerStart = 3f;
+    private float slowTimer;
 
     // Unity stuff that user shouldn't mess with
     [Header("Unity Stuff")]
@@ -89,6 +88,9 @@ public class Enemy : MonoBehaviour
     // Slow the enemy by pct% (pct is a number from 0 to 1)
     public void Slow(float pct) 
     {
+        if(unSlowable)
+            return;
+
         speed = startSpeed * (1 - pct);
         // Add a lingering effect
         slowTimer = slowTimerStart;

@@ -6,7 +6,8 @@ public class EnemyMovement : MonoBehaviour
     
     // Keep track of the next waypoint
     private Transform target;
-    private int waypointIndex = 0;
+    // [HideInInspector]
+    public int waypointIndex = 0;
 
     private Enemy enemy;
 
@@ -14,7 +15,7 @@ public class EnemyMovement : MonoBehaviour
     void Start()
     {
         enemy = GetComponent<Enemy>();
-        target = Waypoints.waypoints[0];
+        target = Waypoints.waypoints[waypointIndex];
     }
 
     // Go from waypoint to waypoint
@@ -31,7 +32,8 @@ public class EnemyMovement : MonoBehaviour
     }
 
     // Get the next waypoint in order
-    void GetNextWaypoint() {
+    void GetNextWaypoint() 
+    {
         // Reached the end
         if(waypointIndex >= Waypoints.waypoints.Length - 1)
         {
@@ -43,15 +45,20 @@ public class EnemyMovement : MonoBehaviour
         target = Waypoints.waypoints[waypointIndex];
     }
 
+    public void changeWaypoint(int newWaypointIndex)
+    {
+        waypointIndex = newWaypointIndex;
+        target = Waypoints.waypoints[waypointIndex];
+    }
+
     // Destroy the enemy when they reach the end
     void EndPath()
     {
-        if(!enemy.isFake)
-        {
-            PlayerStats.Lives -= enemy.LivesCount;
-            GameStats.EnemiesAlive--;
+        if(!enemy.noLifeCount)
             AudioManager.instance.Play("LifeLost");
-        }
+
+        PlayerStats.Lives -= enemy.LivesCount;
+        GameStats.EnemiesAlive--;
         Destroy(gameObject);
     }
     

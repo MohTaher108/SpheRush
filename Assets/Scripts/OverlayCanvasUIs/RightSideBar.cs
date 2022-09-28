@@ -16,7 +16,7 @@ public class RightSideBar : MonoBehaviour
     public Sprite pauseButtonSprite;
     public Image playSprite;
 
-    public GameObject HowToPlayUI;
+    public HowToPlay HowToPlayUIScript;
 
     public GameObject pathCheckButton;
 
@@ -40,7 +40,10 @@ public class RightSideBar : MonoBehaviour
         if(!isStarted)
         {
             if(pathCheckEnemy != null)
+            {
                 Destroy(pathCheckEnemy);
+                GameStats.EnemiesAlive--;
+            }
 
             isStarted = true;
             pathCheckButton.SetActive(false);
@@ -56,8 +59,7 @@ public class RightSideBar : MonoBehaviour
 
     public void HowToPlay()
     {
-        HowToPlayUI.SetActive(true);
-        Time.timeScale = 0f;
+        HowToPlayUIScript.Activate();
     }
 
     public void PathCheck()

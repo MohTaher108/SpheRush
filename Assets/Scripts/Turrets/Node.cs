@@ -103,11 +103,12 @@ public class Node : MonoBehaviour
     {
         PlayerStats.Money += turretBlueprint.GetSellAmount();
 
-        // Instantiate particle effects for selling a turret then delete them after 5 seconds
+        // Instantiate particle effects for selling a turret then delete them after 5 seconds'
         GameObject effect = Instantiate(buildManager.sellEffect, GetBuildPosition(), Quaternion.identity);
         Destroy(effect, 5f);
 
         // Get rid of turret
+        AudioManager.instance.Play("TurretSold");
         Destroy(turret);
         turretBlueprint = null;
     }

@@ -51,12 +51,14 @@ public class SceneFader : MonoBehaviour
     // Fade to a different scene (using scene's name)
     public void FadeTo(string scene)
     {
+        AudioManager.instance.Play("LevelSelect");
         StartCoroutine(FadeOut(scene));
     }
 
     // Fade to a different scene (using buildIndex)
     public void FadeTo(int scene)
     {
+        AudioManager.instance.Play("LevelSelect");
         StartCoroutine(FadeOut(scene));
     }
 

@@ -142,17 +142,30 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Turrets:\n     - To select a turret: click the turret icon at the bottom
-    of your screen of your turret's choosing (as long as you can afford it)\n    
-    - To place a turret: select a turret, then click an empty white space\n     -
-    To upgrade/sell a turret: click on the turret's space, and click the desired
-    button\n\nOther buttons:\n     - To pause the next wave's countdown: click the
-    play/pause button at the top right of your screen\n     - To reveal this guide
-    again: click the \"i\" at the top right of your screen\n\nTips: \n     - Killed
-    enemies and completed waves both provide money, so you can build and upgrade
-    even more turrets!\n     - Remember to use a variation of turrets to defeat all
-    types of enemy waves\n     - To reset your progress, go to the main menu and
-    click \"reset game\" at the bottom left "
+  m_text: "Controls:\n     - WASD or pan the mouse to the edge to move the camera\n    
+    - Use the scroll wheel to zoom in and out\n     - 1, 2, 3 to select each turret\n    
+    - Spacebar to toggle next wave countdown\n\nTurrets:\n     - To select a turret:
+    click the turret icon at the bottom of your screen of your turret's choosing
+    (as long as you can afford it)\n     - To place a turret: select a turret, then
+    click an empty white space\n     - To upgrade/sell a turret: click on the turret's
+    space, and click the desired button\n\nTurret Types:\n     - Standard Turret:
+    shoots one bullet at a time\n     - Missile Launcher: shoots one missile that
+    also hurts a few nearby enemies (for less damage)\n     - Laser Beamer: Deals
+    a percentage of enemy health in damage and slows enemies (needs time for damage
+    to ramp up)\n\nEnemy types:\n     - Grey (fake): shows the track, 0 lives taken\n    
+    - Blue (simple): medium hp, medium speed, 1 life taken\n     - Yellow (fast):
+    very low hp, very fast speed, 1 life taken\n     - Red (tough): very high hp,
+    very slow speed, 3 lives taken\n     - Dark Purple (witch): high hp, slow speed,
+    spawns skeletons, unslowable, 5 lives taken\n     - Light Purple (skeleton):
+    very low hp, fast speed, unslowable, 0 lives taken\n\nUI buttons:\n     - To
+    pause the next wave's countdown: click the play/pause button at the top right
+    of your screen\n     - To reveal this guide again: click the \"i\" at the top
+    right of your screen\n     - To spawn a fake enemy that shows the track: click
+    the \"!\" at the top right of your screen\n\nTips: \n     - Killed enemies and
+    completed waves both provide money, so you can build and upgrade even more turrets!\n    
+    - Remember to use a variation of turrets to defeat all types of enemy waves\n    
+    - To reset your progress, go to the main menu and click \"reset game\" at the
+    bottom left "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7f3b71d3ab4d2404e898fcf1f6d30b7d, type: 2}
   m_sharedMaterial: {fileID: -1169922037470226368, guid: 7f3b71d3ab4d2404e898fcf1f6d30b7d, type: 2}
@@ -179,8 +192,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

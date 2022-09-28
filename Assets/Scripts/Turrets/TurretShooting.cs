@@ -11,7 +11,7 @@ public class TurretShooting : MonoBehaviour
     [Header("Use Bullets/Missiles (default)")]
     public GameObject bulletPrefab;
     public float fireRate;
-    private float fireCountdown = 0f;
+    private float fireCountdown;
 
     [Header("Use Laser")]
     public bool useLaser = false;
@@ -69,6 +69,7 @@ public class TurretShooting : MonoBehaviour
 
     void Start()
     {
+        fireCountdown = 0f;
         if(useLaser)
             lineWidth = lineRenderer.startWidth;
         // Repeat the function UpdateTarget every 0.5 seconds starting from 0 seconds

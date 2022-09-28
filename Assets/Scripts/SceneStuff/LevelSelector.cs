@@ -46,9 +46,8 @@ public class LevelSelector : MonoBehaviour
             AudioManager.instance.Play("CorrectSecretCodeInput");
         } else if((Input.GetKeyDown(KeyCode.T) && secretLevelKey == 5)) // If the user finished the word, load the secret level
         {
-            AudioManager.instance.Play("LevelSelect");
             SceneFader.instance.FadeTo(SceneFader.secretLevelSceneName);
-        } else if(Input.anyKeyDown) // If the user hits the wrong button, reset their progress
+        } else if(Input.anyKeyDown && !Input.GetMouseButtonDown(0)) // If the user hits the wrong button, reset their progress (ignore mouse clicks)
         {
             AudioManager.instance.Play("IncorrectSecretCodeInput");
             secretLevelKey = 0;
@@ -57,13 +56,11 @@ public class LevelSelector : MonoBehaviour
 
     public void SelectLevel(string levelName)
     {
-        AudioManager.instance.Play("LevelSelect");
         SceneFader.instance.FadeTo(levelName);
     }
 
     public void Menu()
     {
-        AudioManager.instance.Play("LevelSelect");
         SceneFader.instance.FadeTo(SceneFader.menuSceneName);
     }
 

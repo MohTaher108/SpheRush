@@ -57,6 +57,18 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: HowToPlayOpened
+    clip: {fileID: 8300000, guid: 5b5890b20dd741142a1563f6ad40dab8, type: 3}
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: HowToPlayClosed
+    clip: {fileID: 8300000, guid: 8d147a7bb6cd5874ca7d4798acffda03, type: 3}
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   - name: CorrectSecretCodeInput
     clip: {fileID: 8300000, guid: 26c491368d7900f4c9d54b7e15392a2e, type: 3}
     volume: 0.2
@@ -83,7 +95,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: WaveComplete
     clip: {fileID: 8300000, guid: 26d09697271bb2746ae7ab3666412231, type: 3}
-    volume: 0.3
+    volume: 0.25
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -119,6 +131,12 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: TurretUpgraded
     clip: {fileID: 8300000, guid: f8174d9a290a03b4f9b1bf90ba7abd99, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: TurretSold
+    clip: {fileID: 8300000, guid: cd5ed40efa40b104d83087929480e29a, type: 3}
     volume: 0.3
     pitch: 1
     loop: 0
